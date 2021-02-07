@@ -14,9 +14,9 @@ class CategoryMealsScreen extends StatelessWidget {
     final String categoryTitle = routeArguments['title'];
     return Scaffold(
       appBar: AppBar(title: Text(categoryTitle)),
-      body: Center(
-        child: const Text('The Recipes for The Category'),
-      ),
+      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
+        return Container();
+      }),
     );
   }
 }
