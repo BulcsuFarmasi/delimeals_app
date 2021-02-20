@@ -1,9 +1,9 @@
+import 'package:delimeals_app/screens/filters_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-
-  Widget buildListTile(IconData icon, String title) {
-   return ListTile(
+  Widget buildListTile(IconData icon, String title, Function tapHandler) {
+    return ListTile(
       leading: Icon(
         icon,
         size: 26,
@@ -16,13 +16,14 @@ class MainDrawer extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {},
+      onTap: tapHandler,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final NavigatorState navigator = Navigator.of(context);
     return Drawer(
       child: Column(
         children: [
@@ -42,8 +43,20 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
           ),
-          buildListTile(Icons.restaurant, 'Meals'),
-          buildListTile(Icons.settings, 'Settings'),
+          buildListTile(
+            Icons.restaurant,
+            'Meals',
+                () {
+              navigator.pushNamed('/');
+            },
+          ),
+          buildListTile(
+            Icons.settings,
+            'Settings',
+                () {
+              navigator.pushNamed(FiltersScreen.routeName);
+            },
+          ),
         ],
       ),
     );
