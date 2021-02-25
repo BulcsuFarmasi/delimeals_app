@@ -7,11 +7,29 @@ import 'screens/filters_screen.dart';
 import 'screens/meal_detail_screen.dart';
 import 'screens/tabs_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(App());
 
-class MyApp extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
+    Map<String, bool> _filters = {
+      'gluten': false,
+      'lactose': false,
+      'vegetarian': false,
+      'vegan': false,
+    };
+
+    void _setFilters (Map<String, bool> filterData) {
+      setState(() {
+        _filters = filterData;
+      });
+    }
+
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
@@ -38,7 +56,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (BuildContext context) => TabsScreen(),
         CategoryMealsScreen.routeName: (BuildContext context) => CategoryMealsScreen(),
-        FiltersScreen.routeName: (BuildContext context) => FiltersScreen(),
+        FiltersScreen.routeName: (BuildContext context) => FiltersScreen(_setFilters),
         MealDetailScreen.routeName: (BuildContext context) => MealDetailScreen(),
       },
       onGenerateRoute: (RouteSettings settings) {
