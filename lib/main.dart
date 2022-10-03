@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:delimeals_app/dummy_data.dart';
 import 'package:flutter/material.dart';
 
-import 'dummy_data.dart';
 import 'models/meal.dart';
 import 'screens/categories_screen.dart';
 import 'screens/category_meals_screen.dart';
@@ -63,7 +60,8 @@ class _AppState extends State<App> {
       });
     } else {
       setState(() {
-        _favoriteMeals.add(DUMMY_MEALS.firstWhere((Meal meal) => meal.id == mealId));
+        _favoriteMeals
+            .add(DUMMY_MEALS.firstWhere((Meal meal) => meal.id == mealId));
       });
     }
   }
@@ -79,14 +77,11 @@ class _AppState extends State<App> {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        accentColor: Colors.amber,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
+            .copyWith(secondary: Colors.amber),
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Raleway',
-        textTheme: ThemeData
-            .light()
-            .textTheme
-            .copyWith(
+        textTheme: ThemeData.light().textTheme.copyWith(
             bodyText1: TextStyle(
               color: Color.fromRGBO(20, 51, 51, 1),
             ),
@@ -104,16 +99,21 @@ class _AppState extends State<App> {
       // default is /
       routes: {
         '/': (BuildContext context) => TabsScreen(_favoriteMeals),
-        CategoryMealsScreen.routeName: (BuildContext context) => CategoryMealsScreen(_availableMeals),
-        FiltersScreen.routeName: (BuildContext context) => FiltersScreen(_filters, _setFilters),
-        MealDetailScreen.routeName: (BuildContext context) => MealDetailScreen(_toggleFavorite, _isMealFavorite),
+        CategoryMealsScreen.routeName: (BuildContext context) =>
+            CategoryMealsScreen(_availableMeals),
+        FiltersScreen.routeName: (BuildContext context) =>
+            FiltersScreen(_filters, _setFilters),
+        MealDetailScreen.routeName: (BuildContext context) =>
+            MealDetailScreen(_toggleFavorite, _isMealFavorite),
       },
       onGenerateRoute: (RouteSettings settings) {
         print(settings.arguments);
-        return MaterialPageRoute(builder: (BuildContext context) => CategoriesScreen());
+        return MaterialPageRoute(
+            builder: (BuildContext context) => CategoriesScreen());
       },
       onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (BuildContext context) => CategoriesScreen());
+        return MaterialPageRoute(
+            builder: (BuildContext context) => CategoriesScreen());
       },
     );
   }

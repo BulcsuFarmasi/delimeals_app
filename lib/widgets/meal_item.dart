@@ -1,5 +1,4 @@
 import 'package:delimeals_app/models/meal.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/meal_detail_screen.dart';
@@ -25,13 +24,10 @@ class MealItem extends StatelessWidget {
     switch (complexity) {
       case Complexity.Simple:
         return 'Simple';
-        break;
       case Complexity.Challenging:
         return 'Hard';
-        break;
       case Complexity.Hard:
         return 'Challenging';
-        break;
       default:
         return 'Unknown';
     }
@@ -41,21 +37,31 @@ class MealItem extends StatelessWidget {
     switch (affordability) {
       case Affordability.Affordable:
         return 'Affordable';
-        break;
       case Affordability.Pricey:
         return 'Pricey';
-        break;
       case Affordability.Luxurious:
         return 'Luxurious';
-        break;
       default:
         return 'Unknown';
     }
   }
 
+    void selectMeal(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+    )
+        .then((result) {
+      if (result != null) {
+        // removeItem(result);
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
