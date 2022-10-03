@@ -36,10 +36,9 @@ class MealDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? mealId = ModalRoute.of(context)!.settings.arguments as String?;
-    final Meal meal = DUMMY_MEALS.firstWhere((Meal meal) => meal.id == mealId);
-    final ThemeData theme = Theme.of(context);
-    final NavigatorState navigator = Navigator.of(context);
+    final mealId = ModalRoute.of(context)!.settings.arguments as String?;
+    final meal = dummyMeals.firstWhere((Meal meal) => meal.id == mealId);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('${meal.title}'),
@@ -62,7 +61,8 @@ class MealDetailScreen extends StatelessWidget {
                   return Card(
                     color: theme.colorScheme.secondary,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       child: Text(meal.ingredients[index]),
                     ),
                   );
