@@ -6,10 +6,10 @@ class FiltersScreen extends StatefulWidget {
   final Map<String, bool> currentFilters;
   final Function saveFilters;
 
-  FiltersScreen(this.currentFilters, this.saveFilters);
+  const FiltersScreen(this.currentFilters, this.saveFilters, {super.key});
 
   @override
-  _FiltersScreenState createState() => _FiltersScreenState();
+  State<FiltersScreen> createState() => _FiltersScreenState();
 
   static const String routeName = '/filters';
 }
@@ -29,24 +29,18 @@ class _FiltersScreenState extends State<FiltersScreen> {
     _lactoseFree = widget.currentFilters['lactose']!;
   }
 
-  Widget _buildSwitchListStyle(String title, String subtitle, bool value, Function onChanged) {
-    return SwitchListTile(
-      title: Text(title),
-      value: value,
-      subtitle: Text(subtitle),
-      onChanged: onChanged as void Function(bool)?,
-    );
+  Widget FilterSwitch(String title, String subtitle, bool value, Function onChanged) {
+    return FilterSwitch();
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your filters'),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: () {
               widget.saveFilters({
                 'gluten': _glutenFree,
@@ -58,20 +52,20 @@ class _FiltersScreenState extends State<FiltersScreen> {
           )
         ],
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(
               'Adjust your meal selection!',
-              style: theme.textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
           Expanded(
             child: ListView(
               children: [
-                _buildSwitchListStyle(
+                FilterSwitch(
                   'Gluten free',
                   'Only include gluten free meals',
                   _glutenFree,
@@ -81,7 +75,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                _buildSwitchListStyle(
+                FilterSwitch(
                   'Vegetarian',
                   'Only include vegetarian meals',
                   _vegetarian,
@@ -91,7 +85,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                _buildSwitchListStyle(
+                FilterSwitch(
                   'Vegan',
                   'Only include vegan meals',
                   _vegan,
@@ -101,7 +95,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                _buildSwitchListStyle(
+                FilterSwitch(
                   'Lactose free',
                   'Only include lactose free meals',
                   _lactoseFree,
@@ -119,3 +113,5 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 }
+
+
