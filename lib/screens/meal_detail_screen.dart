@@ -36,7 +36,7 @@ class MealDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String mealId = ModalRoute.of(context).settings.arguments as String;
+    final String? mealId = ModalRoute.of(context)!.settings.arguments as String?;
     final Meal meal = DUMMY_MEALS.firstWhere((Meal meal) => meal.id == mealId);
     final ThemeData theme = Theme.of(context);
     final NavigatorState navigator = Navigator.of(context);

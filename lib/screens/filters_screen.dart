@@ -23,10 +23,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   initState() {
     super.initState();
-    _glutenFree = widget.currentFilters['gluten'];
-    _vegetarian = widget.currentFilters['vegetarian'];
-    _vegan = widget.currentFilters['vegan'];
-    _lactoseFree = widget.currentFilters['lactose'];
+    _glutenFree = widget.currentFilters['gluten']!;
+    _vegetarian = widget.currentFilters['vegetarian']!;
+    _vegan = widget.currentFilters['vegan']!;
+    _lactoseFree = widget.currentFilters['lactose']!;
   }
 
   Widget _buildSwitchListStyle(String title, String subtitle, bool value, Function onChanged) {
@@ -34,7 +34,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
       title: Text(title),
       value: value,
       subtitle: Text(subtitle),
-      onChanged: onChanged,
+      onChanged: onChanged as void Function(bool)?,
     );
   }
 

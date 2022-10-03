@@ -18,15 +18,15 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   // CategoryMealsScreen({this.categoryId, this.categoryTitle});
   //
 
-  String categoryTitle;
-  List<Meal> categoryMeals;
+  String? categoryTitle;
+  late List<Meal> categoryMeals;
   bool _loadedInitData = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!_loadedInitData) {
-      final Map<String, String> routeArguments = ModalRoute.of(context).settings.arguments as Map<String, String>;
+      final Map<String, String> routeArguments = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
       final categoryId = routeArguments['id'];
       categoryTitle = routeArguments['title'];
       categoryMeals = widget.availableMeals.where((Meal meal) => meal.categories.contains(categoryId)).toList();
@@ -37,7 +37,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(categoryTitle)),
+      appBar: AppBar(title: Text(categoryTitle!)),
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return MealItem(

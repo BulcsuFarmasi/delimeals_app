@@ -15,7 +15,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  List<Map<String, Object>> _pages;
+  late List<Map<String, Object>> _pages;
 
   @override
   void initState() {
@@ -39,10 +39,10 @@ class _TabsScreenState extends State<TabsScreen> {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title']),
+        title: Text(_pages[_selectedPageIndex]['title'] as String),
       ),
       drawer: MainDrawer(),
-      body: _pages[_selectedPageIndex]['page'],
+      body: _pages[_selectedPageIndex]['page'] as Widget?,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: theme.primaryColor,
         selectedItemColor: theme.accentColor,
