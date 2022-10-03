@@ -22,7 +22,7 @@ class CategoryItem extends StatelessWidget {
       onTap: () {
         selectCategory(context);
       },
-      splashColor: theme.primaryColor,
+      splashColor: theme.colorScheme.primary,
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(15),
