@@ -4,7 +4,7 @@ class FilterSwitch extends StatelessWidget {
   final String title;
   final bool filterValue;
   final String subtitle;
-  final Function onChanged;
+  final ValueChanged<bool> onChanged;
 
   const FilterSwitch({
     super.key,
@@ -12,15 +12,15 @@ class FilterSwitch extends StatelessWidget {
     required this.filterValue,
     required this.subtitle,
     required this.onChanged,
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
       title: Text(title),
-      value: value,
+      value: filterValue,
       subtitle: Text(subtitle),
-      onChanged: onChanged as void Function(bool)?,
+      onChanged: onChanged,
     );
   }
 }

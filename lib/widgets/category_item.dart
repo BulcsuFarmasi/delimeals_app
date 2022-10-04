@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({required this.id, required this.title, required this.color});
+  const CategoryItem({super.key, required this.id, required this.title, required this.color});
 
   final String id;
   final String title;
@@ -17,7 +17,7 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
     return InkWell(
       onTap: () {
         selectCategory(context);
@@ -26,10 +26,6 @@ class CategoryItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(15),
-        child: Text(
-          title,
-          style: theme.textTheme.headline6,
-        ),
         decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -40,6 +36,10 @@ class CategoryItem extends StatelessWidget {
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(15)),
+        child: Text(
+          title,
+          style: theme.textTheme.headline6,
+        ),
       ),
     );
   }
