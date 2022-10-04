@@ -1,9 +1,10 @@
+import 'package:delimeals_app/models/ingredient.dart';
 import 'package:flutter/material.dart';
 
 import './models/category.dart';
 import './models/meal.dart';
 
-const dummyCategories =  [
+const dummyCategories = [
   Category(
     id: 'c1',
     title: 'Italian',
@@ -56,7 +57,7 @@ const dummyCategories =  [
   ),
 ];
 
-const dummyMeals =  [
+final dummyMeals = [
   Meal(
     id: 'm1',
     categories: [
@@ -70,12 +71,16 @@ const dummyMeals =  [
         'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
     duration: 20,
     ingredients: [
-      '4 Tomatoes',
-      '1 Tablespoon of Olive Oil',
-      '1 Onion',
-      '250g Spaghetti',
-      'Spices',
-      'Cheese (optional)'
+      Ingredient(quantity: '4', name: 'Tomatoes'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon of',
+          name: 'Olive Oil'),
+      Ingredient(quantity: '1', name: 'Onion'),
+      Ingredient(quantity: '250', measurement: 'g', name: 'Spaghetti'),
+      Ingredient(name: 'Spices'),
+      Ingredient(name: 'Cheese (optional)'),
     ],
     steps: [
       'Cut the tomatoes and the onion into small pieces.',
@@ -99,9 +104,37 @@ const dummyMeals =  [
     title: 'Toast Hawaii',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
-    imageUrl: 'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
     duration: 10,
-    ingredients: ['1 Slice White Bread', '1 Slice Ham', '1 Slice Pineapple', '1-2 Slices of Cheese', 'Butter'],
+    ingredients: [
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Slice',
+          name: 'White Bread'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Slice',
+          name: 'Ham'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Slice',
+          name: 'Pineapple'),
+      Ingredient(
+          quantity: '1-2',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Slices of',
+          name: 'Chesse'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon of',
+          name: 'Olive Oil'),
+      Ingredient(name: 'Butter'),
+    ],
     steps: [
       'Butter one side of the white bread',
       'Layer ham, the pineapple and cheese on the white bread',
@@ -121,9 +154,17 @@ const dummyMeals =  [
     title: 'Classic Hamburger',
     affordability: Affordability.pricey,
     complexity: Complexity.simple,
-    imageUrl: 'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
     duration: 45,
-    ingredients: ['300g Cattle Hack', '1 Tomato', '1 Cucumber', '1 Onion', 'Ketchup', '2 Burger Buns'],
+    ingredients: [
+      Ingredient(quantity: '300', measurement: 'g', name: 'Cattle Hack'),
+      Ingredient(quantity: '1', name: 'Tomato'),
+      Ingredient(quantity: '1', name: 'Cucumber'),
+      Ingredient(quantity: '1', name: 'Onion'),
+      Ingredient(quantity: '1', name: 'Ketchup'),
+      Ingredient(quantity: '2', name: 'Burger Buns'),
+    ],
     steps: [
       'Form 2 patties',
       'Fry the patties for c. 4 minutes on each side',
@@ -144,17 +185,18 @@ const dummyMeals =  [
     title: 'Wiener Schnitzel',
     affordability: Affordability.luxurious,
     complexity: Complexity.challenging,
-    imageUrl: 'https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg',
     duration: 60,
     ingredients: [
-      '8 Veal Cutlets',
-      '4 Eggs',
-      '200g Bread Crumbs',
-      '100g Flour',
-      '300ml Butter',
-      '100g Vegetable Oil',
-      'Salt',
-      'Lemon Slices'
+      Ingredient(quantity: '8', name: 'Veal Cutlets'),
+      Ingredient(quantity: '4', name: 'Eggs'),
+      Ingredient(quantity: '200', measurement: 'g', name: 'Cucumber'),
+      Ingredient(quantity: '100', measurement: 'g', name: 'Flour'),
+      Ingredient(quantity: '300', measurement: 'ml', name: 'Butter'),
+      Ingredient(quantity: '100', measurement: 'ml', name: 'Vegetable Oil'),
+      Ingredient(name: 'Salt'),
+      Ingredient(name: 'Lemon Slices'),
     ],
     steps: [
       'Tenderize the veal to about 2–4mm, and salt on both sides.',
@@ -180,18 +222,20 @@ const dummyMeals =  [
     title: 'Salad with Smoked Salmon',
     affordability: Affordability.luxurious,
     complexity: Complexity.simple,
-    imageUrl: 'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
     duration: 15,
     ingredients: [
-      'Arugula',
-      'Lamb\'s Lettuce',
-      'Parsley',
-      'Fennel',
-      '200g Smoked Salmon',
-      'Mustard',
-      'Balsamic Vinegar',
-      'Olive Oil',
-      'Salt and Pepper'
+      Ingredient(name: 'Arugula'),
+      Ingredient(name: 'Lamb\'s Lettuce'),
+      Ingredient(name: 'Parsley'),
+      Ingredient(name: 'Fennel'),
+      Ingredient(quantity: '4', name: 'Eggs'),
+      Ingredient(quantity: '200', measurement: 'g', name: 'Smoked Salmon'),
+      Ingredient(name: 'Mustard'),
+      Ingredient(name: 'Balsamic Vinegar'),
+      Ingredient(name: 'Olive Oil'),
+      Ingredient(name: 'Salt and Pepper'),
     ],
     steps: [
       'Wash and cut salad and herbs',
@@ -214,15 +258,20 @@ const dummyMeals =  [
     title: 'Delicious Orange Mousse',
     affordability: Affordability.affordable,
     complexity: Complexity.hard,
-    imageUrl: 'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
     duration: 240,
     ingredients: [
-      '4 Sheets of Gelatine',
-      '150ml Orange Juice',
-      '80g Sugar',
-      '300g Yoghurt',
-      '200g Cream',
-      'Orange Peel',
+      Ingredient(
+          quantity: '4',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Sheets of',
+          name: 'Gelatine'),
+      Ingredient(quantity: '150', measurement: 'ml', name: 'Orange Juice'),
+      Ingredient(quantity: '80', measurement: 'g', name: 'Sugar'),
+      Ingredient(quantity: '300', measurement: 'g', name: 'Yoghurt'),
+      Ingredient(quantity: '200', measurement: 'g', name: 'Cream'),
+      Ingredient(name: 'Orange Peel'),
     ],
     steps: [
       'Dissolve gelatine in pot',
@@ -248,16 +297,41 @@ const dummyMeals =  [
     title: 'Pancakes',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
-    imageUrl: 'https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653_1280.jpg',
     duration: 20,
     ingredients: [
-      '1 1/2 Cups all-purpose Flour',
-      '3 1/2 Teaspoons Baking Powder',
-      '1 Teaspoon Salt',
-      '1 Tablespoon White Sugar',
-      '1 1/4 cups Milk',
-      '1 Egg',
-      '3 Tablespoons Butter, melted',
+      Ingredient(
+          quantity: '1 1/2',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Cups',
+          name: 'all-purpose Flour'),
+      Ingredient(
+          quantity: '3 1/2',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Teaspoons',
+          name: 'Baking Powder'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Teaspoon',
+          name: 'Salt'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon',
+          name: 'White Sugar'),
+      Ingredient(
+          quantity: '1 1/4',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'cups',
+          name: 'Milk'),
+      Ingredient(quantity: '1', name: 'Egg'),
+      Ingredient(
+          quantity: '3',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoons',
+          name: 'Butter, melted'),
     ],
     steps: [
       'In a large bowl, sift together the flour, baking powder, salt and sugar.',
@@ -278,16 +352,33 @@ const dummyMeals =  [
     title: 'Creamy Indian Chicken Curry',
     affordability: Affordability.pricey,
     complexity: Complexity.challenging,
-    imageUrl: 'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
     duration: 35,
     ingredients: [
-      '4 Chicken Breasts',
-      '1 Onion',
-      '2 Cloves of Garlic',
-      '1 Piece of Ginger',
-      '4 Tablespoons Almonds',
-      '1 Teaspoon Cayenne Pepper',
-      '500ml Coconut Milk',
+      Ingredient(quantity: '4', name: 'Chicken Breasts'),
+      Ingredient(quantity: '1', name: 'Onion'),
+      Ingredient(
+          quantity: '2',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Cloves of',
+          name: 'Garlic'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Piece of',
+          name: 'Ginger'),
+      Ingredient(
+          quantity: '4',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoons',
+          name: 'Almonds'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Teaspoon',
+          name: 'Cayenne Pepper'),
+      Ingredient(quantity: '500', measurement: 'ml', name: 'Coconut Milk'),
     ],
     steps: [
       'Slice and fry the chicken breast',
@@ -310,21 +401,62 @@ const dummyMeals =  [
     title: 'Chocolate Souffle',
     affordability: Affordability.affordable,
     complexity: Complexity.hard,
-    imageUrl: 'https://cdn.pixabay.com/photo/2014/08/07/21/07/souffle-412785_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2014/08/07/21/07/souffle-412785_1280.jpg',
     duration: 45,
     ingredients: [
-      '1 Teaspoon melted Butter',
-      '2 Tablespoons white Sugar',
-      '2 Ounces 70% dark Chocolate, broken into pieces',
-      '1 Tablespoon Butter',
-      '1 Tablespoon all-purpose Flour',
-      '4 1/3 tablespoons cold Milk',
-      '1 Pinch Salt',
-      '1 Pinch Cayenne Pepper',
-      '1 Large Egg Yolk',
-      '2 Large Egg Whites',
-      '1 Pinch Cream of Tartar',
-      '1 Tablespoon white Sugar',
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Teaspoon',
+          name: 'melted Butter'),
+      Ingredient(
+          quantity: '2',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoons',
+          name: 'white Sugar'),
+      Ingredient(
+          quantity: '2',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Ounces',
+          name: '70% dark Chocolate, broken into pieces'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon',
+          name: 'Butter'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon',
+          name: 'all-purpose Flour'),
+      Ingredient(
+          quantity: '4 1/3',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'tablespoons',
+          name: 'cold Milk'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Pinch',
+          name: 'Salt'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Pinch',
+          name: 'Cayenne Pepper'),
+      Ingredient(quantity: '1', name: 'Large Egg Yolk'),
+      Ingredient(quantity: '2', name: 'Large Egg Whites'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Pinch',
+          name: 'Cream of Tartar'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon',
+          name: 'white Sugar'),
     ],
     steps: [
       'Preheat oven to 190°C. Line a rimmed baking sheet with parchment paper.',
@@ -360,14 +492,23 @@ const dummyMeals =  [
     title: 'Asparagus Salad with Cherry Tomatoes',
     affordability: Affordability.luxurious,
     complexity: Complexity.simple,
-    imageUrl: 'https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg',
     duration: 30,
     ingredients: [
-      'White and Green Asparagus',
-      '30g Pine Nuts',
-      '300g Cherry Tomatoes',
-      'Salad',
-      'Salt, Pepper and Olive Oil'
+      Ingredient(name: 'White and Green Asparagus'),
+      Ingredient(quantity: '30', measurement: 'g', name: 'Pine Nuts'),
+      Ingredient(
+          quantity: '300',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'g',
+          name: 'Cherry Tomatoes'),
+      Ingredient(name: 'Salad'),
+      Ingredient(
+          quantity: '1',
+          quanityMeasurementIsSeparated: true,
+          measurement: 'Tablespoon',
+          name: 'Salt, Pepper and Olive Oil'),
     ],
     steps: [
       'Wash, peel and cut the asparagus',

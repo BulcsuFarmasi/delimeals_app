@@ -1,4 +1,5 @@
 import 'package:delimeals_app/dummy_data.dart';
+import 'package:delimeals_app/models/filter_option.dart';
 import 'package:flutter/material.dart';
 
 import 'models/meal.dart';
@@ -8,41 +9,40 @@ import 'screens/filters_screen.dart';
 import 'screens/meal_detail_screen.dart';
 import 'screens/tabs_screen.dart';
 
-void main() => runApp(App());
+void main() => runApp(const App());
 
 class App extends StatefulWidget {
+  const App({super.key});
+
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
-  Map<String, bool> _filters = {
-    'gluten': false,
-    'lactose': false,
-    'vegetarian': false,
-    'vegan': false,
+  Map<FilterOption, bool> _filters = {
+    FilterOption.gluten: false,
+    FilterOption.lactose: false,
+    FilterOption.vegetarian: false,
+    FilterOption.vegan: false,
   };
 
   List<Meal> _availableMeals = dummyMeals;
-  List<Meal> _favoriteMeals = [];
+  final List<Meal> _favoriteMeals = [];
 
-  void _setFilters(Map<String, bool> filterData) {
+  void _setFilters(Map<FilterOption, bool> filterData) {
     setState(() {
       _filters = filterData;
       _availableMeals = dummyMeals.where((Meal meal) {
-        if (_filters['gluten']! && !meal.isGlutenFree) {
+        if (_filters[FilterOption.gluten]! && !meal.isGlutenFree) {
           return false;
         }
-        if (_filters['lactose']! && !meal.isLactoseFree) {
+        if (_filters[FilterOption.lactose]! && !meal.isLactoseFree) {
           return false;
         }
-        if (_filters['gluten']! && !meal.isGlutenFree) {
+        if (_filters[FilterOption.vegetarian]! && !meal.isVegetarian) {
           return false;
         }
-        if (_filters['vegetarian']! && !meal.isVegetarian) {
-          return false;
-        }
-        if (_filters['vegan']! && !meal.isVegan) {
+        if (_filters[FilterOption.vegan]! && !meal.isVegan) {
           return false;
         }
         return true;
@@ -79,16 +79,16 @@ class _AppState extends State<App> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
             .copyWith(secondary: Colors.amber),
-        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Raleway',
         textTheme: ThemeData.light().textTheme.copyWith(
-            bodyText1: TextStyle(
+            bodyText1: const TextStyle(
               color: Color.fromRGBO(20, 51, 51, 1),
             ),
-            bodyText2: TextStyle(
+            bodyText2: const TextStyle(
               color: Color.fromRGBO(20, 51, 51, 1),
             ),
-            headline6: TextStyle(
+            headline6: const TextStyle(
               fontSize: 20,
               fontFamily: 'RobotoCondensed',
               fontWeight: FontWeight.bold,
@@ -109,11 +109,11 @@ class _AppState extends State<App> {
       onGenerateRoute: (RouteSettings settings) {
         print(settings.arguments);
         return MaterialPageRoute(
-            builder: (BuildContext context) => CategoriesScreen());
+            builder: (BuildContext context) => const CategoriesScreen());
       },
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
-            builder: (BuildContext context) => CategoriesScreen());
+            builder: (BuildContext context) => const CategoriesScreen());
       },
     );
   }

@@ -1,0 +1,1 @@
+enum FilterOption { gluten, lactose, vegetarian, vegan }
