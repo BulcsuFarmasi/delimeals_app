@@ -1,9 +1,9 @@
 import 'package:delimeals_app/models/meal.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/main_drawer.dart';
-import './categories_screen.dart';
-import './favorites_screen.dart';
+import 'package:delimeals_app/widgets/main_drawer.dart';
+import 'package:delimeals_app/screens/categories_screen.dart';
+import 'package:delimeals_app/screens/favorites_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen(this.favoriteMeals, {super.key});

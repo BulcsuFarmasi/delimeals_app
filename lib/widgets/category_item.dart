@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/category_meals_screen.dart';
+import 'package:delimeails_app/screens/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.id, required this.title, required this.color});

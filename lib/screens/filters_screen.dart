@@ -2,7 +2,7 @@ import 'package:delimeals_app/models/filter_option.dart';
 import 'package:delimeals_app/widgets/filter_switch.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/main_drawer.dart';
+import 'package:delimeals_app/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
   final Map<FilterOption, bool> currentFilters;

@@ -2,8 +2,8 @@ import 'package:delimeals_app/widgets/meal_detail_section_title.dart';
 import 'package:delimeals_app/widgets/meal_detail_sections.dart';
 import 'package:flutter/material.dart';
 
-import '../dummy_data.dart';
-import '../models/meal.dart';
+import 'package:delimeals_app/dummy_data.dart';
+import 'package:delimeals_app/models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
   const MealDetailScreen(this.toggleFavorite, this.isMealFavorite, {super.key});
@@ -15,6 +15,7 @@ class MealDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context)!.settings.arguments as String?;
     final meal = dummyMeals.firstWhere((Meal meal) => meal.id == mealId);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -35,7 +36,7 @@ class MealDetailScreen extends StatelessWidget {
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: theme.colorScheme.secondary,
                     child: Padding(
                       padding:
                           const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -54,7 +55,7 @@ class MealDetailScreen extends StatelessWidget {
                     ListTile(
                       leading: CircleAvatar(
                         child: Text('#${index + 1}'),
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: theme.colorScheme.primary,
                       ),
                       title: Text(meal.steps[index]),
                     ),
