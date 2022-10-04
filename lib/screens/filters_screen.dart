@@ -1,15 +1,17 @@
+import 'package:delimeals_app/models/filter_option.dart';
+import 'package:delimeals_app/widgets/filter_switch.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/main_drawer.dart';
+import 'package:delimeals_app/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
-  final Map<String, bool> currentFilters;
+  final Map<FilterOption, bool> currentFilters;
   final Function saveFilters;
 
-  FiltersScreen(this.currentFilters, this.saveFilters);
+  const FiltersScreen(this.currentFilters, this.saveFilters, {super.key});
 
   @override
-  _FiltersScreenState createState() => _FiltersScreenState();
+  State<FiltersScreen> createState() => _FiltersScreenState();
 
   static const String routeName = '/filters';
 }
@@ -23,89 +25,79 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   initState() {
     super.initState();
-    _glutenFree = widget.currentFilters['gluten']!;
-    _vegetarian = widget.currentFilters['vegetarian']!;
-    _vegan = widget.currentFilters['vegan']!;
-    _lactoseFree = widget.currentFilters['lactose']!;
-  }
-
-  Widget _buildSwitchListStyle(String title, String subtitle, bool value, Function onChanged) {
-    return SwitchListTile(
-      title: Text(title),
-      value: value,
-      subtitle: Text(subtitle),
-      onChanged: onChanged as void Function(bool)?,
-    );
+    _glutenFree = widget.currentFilters[FilterOption.gluten]!;
+    _vegetarian = widget.currentFilters[FilterOption.vegetarian]!;
+    _vegan = widget.currentFilters[FilterOption.vegetarian]!;
+    _lactoseFree = widget.currentFilters[FilterOption.lactose]!;
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your filters'),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: () {
               widget.saveFilters({
-                'gluten': _glutenFree,
-                'lactose': _lactoseFree,
-                'vegetarian': _vegetarian,
-                'vegan': _vegan,
+                FilterOption.gluten: _glutenFree,
+                FilterOption.lactose: _lactoseFree,
+                FilterOption.vegetarian: _vegetarian,
+                FilterOption.vegan: _vegan,
               });
             },
           )
         ],
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(
               'Adjust your meal selection!',
-              style: theme.textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
           Expanded(
             child: ListView(
               children: [
-                _buildSwitchListStyle(
-                  'Gluten free',
-                  'Only include gluten free meals',
-                  _glutenFree,
-                  (bool newValue) {
+                FilterSwitch(
+                  title: 'Gluten free',
+                  subtitle: 'Only include gluten free meals',
+                  filterValue: _glutenFree,
+                  onChanged: (bool newValue) {
                     setState(() {
                       _glutenFree = newValue;
                     });
                   },
                 ),
-                _buildSwitchListStyle(
-                  'Vegetarian',
-                  'Only include vegetarian meals',
-                  _vegetarian,
-                  (bool newValue) {
+                FilterSwitch(
+                  title: 'Vegetarian',
+                  subtitle: 'Only include vegetarian meals',
+                  filterValue: _vegetarian,
+                  onChanged: (bool newValue) {
                     setState(() {
                       _vegetarian = newValue;
                     });
                   },
                 ),
-                _buildSwitchListStyle(
-                  'Vegan',
-                  'Only include vegan meals',
-                  _vegan,
-                  (bool newValue) {
+                FilterSwitch(
+                  title: 'Vegan',
+                  subtitle: 'Only include vegan meals',
+                  filterValue: _vegan,
+                  onChanged:(bool newValue) {
                     setState(() {
                       _vegan = newValue;
                     });
                   },
                 ),
-                _buildSwitchListStyle(
-                  'Lactose free',
-                  'Only include lactose free meals',
-                  _lactoseFree,
-                  (bool newValue) {
+                FilterSwitch(
+                  title: 'Lactose free',
+                  subtitle:'Only include lactose free meals',
+                  filterValue: _lactoseFree,
+                  onChanged: (bool newValue) {
                     setState(() {
                       _lactoseFree = newValue;
                     });
@@ -119,3 +111,5 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 }
+
+

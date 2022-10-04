@@ -1,53 +1,29 @@
+import 'package:delimeals_app/widgets/meal_detail_section_title.dart';
+import 'package:delimeals_app/widgets/meal_detail_sections.dart';
 import 'package:flutter/material.dart';
 
-import '../dummy_data.dart';
-import '../models/meal.dart';
+import 'package:delimeals_app/dummy_data.dart';
+import 'package:delimeals_app/models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  MealDetailScreen(this.toggleFavorite, this.isMealFavorite);
+  const MealDetailScreen(this.toggleFavorite, this.isMealFavorite, {super.key});
 
   final Function toggleFavorite;
   final Function isMealFavorite;
 
-  Widget buildSectionTitle(String title, ThemeData theme) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Text(
-        title,
-        style: theme.textTheme.headline6,
-      ),
-    );
-  }
-
-  Widget buildContainer(Widget child) {
-    return Container(
-      height: 150,
-      width: 300,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      child: child,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final String? mealId = ModalRoute.of(context)!.settings.arguments as String?;
-    final Meal meal = DUMMY_MEALS.firstWhere((Meal meal) => meal.id == mealId);
-    final ThemeData theme = Theme.of(context);
-    final NavigatorState navigator = Navigator.of(context);
+    final mealId = ModalRoute.of(context)!.settings.arguments as String?;
+    final meal = dummyMeals.firstWhere((Meal meal) => meal.id == mealId);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${meal.title}'),
+        title: Text(meal.title),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               width: double.infinity,
               child: Image.network(
@@ -55,33 +31,35 @@ class MealDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            buildSectionTitle('Ingredients', theme),
-            buildContainer(
-              ListView.builder(
+            const MealDetailSectionTitle(title: 'Ingredients'),
+            MealDetailSection(
+              child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     color: theme.colorScheme.secondary,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      child: Text(meal.ingredients[index]),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      child: Text(meal.ingredients[index].toString()),
                     ),
                   );
                 },
                 itemCount: meal.ingredients.length,
               ),
             ),
-            buildSectionTitle('Steps', theme),
-            buildContainer(
-              ListView.builder(
+            const MealDetailSectionTitle(title: 'Steps'),
+            MealDetailSection(
+              child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return Column(children: [
                     ListTile(
                       leading: CircleAvatar(
                         child: Text('#${index + 1}'),
+                        backgroundColor: theme.colorScheme.primary,
                       ),
                       title: Text(meal.steps[index]),
                     ),
-                    Divider(),
+                    const Divider(),
                   ]);
                 },
                 itemCount: meal.steps.length,
@@ -101,3 +79,4 @@ class MealDetailScreen extends StatelessWidget {
 
   static const String routeName = '/meal-detail';
 }
+

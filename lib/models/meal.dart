@@ -1,13 +1,15 @@
+import 'package:delimeals_app/models/ingredient.dart';
+
 enum Complexity {
-  Simple,
-  Challenging,
-  Hard,
+  simple,
+  challenging,
+  hard,
 }
 
 enum Affordability {
-  Affordable,
-  Pricey,
-  Luxurious,
+  affordable,
+  pricey,
+  luxurious,
 }
 
 class Meal {
@@ -31,7 +33,7 @@ class Meal {
   final List<String> categories;
   final String title;
   final String imageUrl;
-  final List<String> ingredients;
+  final List<Ingredient> ingredients;
   final List<String> steps;
   final int duration;
   final Complexity complexity;
